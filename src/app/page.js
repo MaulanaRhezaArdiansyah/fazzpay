@@ -1,91 +1,66 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+"use client";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import Link from "next/link";
+import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
+import { FooterLanding } from "./components/FooterLanding";
+import { Header } from "./components/Header";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function LandingPage() {
+  const isLogged = JSON.parse(localStorage.getItem("@login"));
+  console.log(isLogged);
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      {/* <header className="flex justify-between w-full h-32 items-center bg-white/5 backdrop-blur-sm fixed top-0 left-0 md:px-32"> */}
+      {isLogged ? (
+        <Header />
+      ) : (
+        <header className="flex justify-between w-full h-28 items-center bg-[#6379F4]/90 backdrop-blur-sm fixed top-0 left-0 md:px-32">
+          <div className="logo text-white text-3xl font-bold flex items-center">
+            <h2>FazzPay</h2>
+          </div>
+          <nav className="navbar flex justify-center items-center gap-5">
+            <Link href="/auth/login" title="login">
+              <button
+                // onClick={() => router.push("/auth/login")}
+                className="border-2 border-white bg-[#6379F4] rounded-md w-28 py-3 text-white font-bold hover:bg-white hover:text-[#6379F4] duration-200"
+              >
+                Login
+              </button>
+            </Link>
+            <Link href="/auth/signup" title="signup">
+              <button className="border-2 border-white bg-white rounded-md w-28 py-3 text-[#6379F4] font-bold hover:bg-transparent hover:text-white duration-200">
+                Sign Up
+              </button>
+            </Link>
+          </nav>
+        </header>
+      )}
+      <main className="bg-white w-full md:h-[450vh]">
+        <div className="hero w-full md:px-32 md:h-[120vh] border-b-[3px] border-white bg-[#6379F4] flex md:flex-row">
+          <div className="text md:w-[50%] h-full flex flex-col justify-center items-start md:gap-8">
+            <h2 className="text-white text-4xl md:w-[80%] font-bold">
+              Awesome App For Saving Time.
+            </h2>
+            <p className="text-white md:w-[80%]">
+              We bring you a mobile app for banking problems that oftenly
+              wasting much of your times.
+            </p>
+            <Link href={"/home"}>
+              <button className="border-2 border-white bg-white rounded-md w-36 py-3 text-[#6379F4] font-bold hover:bg-transparent hover:text-white duration-200">
+                Try It Free
+              </button>
+            </Link>
+          </div>
+          <div className="image md:w-[50%] h-full flex items-end">
+            <Image src={require("../assets/img/phone-hero.png")} alt="phone" />
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      </main>
+      <FooterLanding />
+    </>
+  );
 }
