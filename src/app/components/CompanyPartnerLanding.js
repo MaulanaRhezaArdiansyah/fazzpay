@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const CompanyPartnerLanding = () => {
   return (
-    <div className="company w-full md:h-52 flex items-center justify-center bg-base-2 md:px-32">
+    <div className="company w-full md:h-52 h-44 px-3 flex items-center justify-center bg-base-2 md:px-32">
       <div className=" h-full w-1/4 flex items-center justify-center">
         <Image
           src={require("../../assets/img/microsoft.png")}

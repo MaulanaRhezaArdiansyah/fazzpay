@@ -13,7 +13,7 @@ export const ReviewLanding = () => {
     },
   ];
   return (
-    <div className="about-app md:px-32 bg-base  w-full md:h-[130vh] flex flex-col items-center justify-center md:gap-6">
+    <div className="about-app md:px-32 w-full md:h-[130vh] h-[100vh] flex flex-col items-center justify-center md:gap-6 gap-6 px-3">
       <h2 className="text-[#3A3D42] text-5xl font-bold text-center">
         What Users are <span className="text-[#6379F4]">Saying.</span>
       </h2>
@@ -25,14 +25,14 @@ export const ReviewLanding = () => {
         {reviews?.map((r) => {
           return (
             <>
-              <div className="md:w-14 md:h-12 rounded-full bg-white shadow-xl flex items-center justify-center cursor-pointer hover:scale-125 duration-200">
+              <div className="md:w-14 md:h-12 rounded-full bg-white shadow-xl flex items-center justify-center cursor-pointer hover:scale-125 duration-200 max-sm:hidden">
                 <Image
                   src={require("../../assets/img/arrow-left.png")}
                   alt="prev"
                 />
               </div>
 
-              <div className="review-card md:h-full md:w-[90%] bg-white shadow-xl rounded-xl flex flex-col items-center justify-center md:px-8 md:py-10">
+              <div className="review-card md:h-full h-[30rem] md:w-[90%] bg-white shadow-xl rounded-xl flex flex-col items-center justify-center md:px-8 md:py-10 p-8">
                 <div className="review-img md:w-16 md:h-16 flex items-center justify-center md:mb-2 rounded-full">
                   <img
                     src={
@@ -47,7 +47,9 @@ export const ReviewLanding = () => {
                 <h5 className="text-[#373C46] text-lg font-bold text-center">
                   Alex Hansinburg
                 </h5>
-                <p className="text-[#56585B] md:mb-8 text-center">Designer</p>
+                <p className="text-[#56585B] md:mb-8 text-center mb-8">
+                  Designer
+                </p>
                 <p className="text-[#676A71] text-center">
                   “This is the most outstanding app that I’ve ever try in my
                   live, this app is such an amazing masterpiece and it’s
@@ -57,7 +59,7 @@ export const ReviewLanding = () => {
                 </p>
               </div>
 
-              <div className="md:w-14 md:h-12 rounded-full bg-white shadow-xl flex items-center justify-center cursor-pointer hover:scale-125 duration-200">
+              <div className="md:w-14 md:h-12 rounded-full bg-white shadow-xl flex items-center justify-center cursor-pointer hover:scale-125 duration-200 max-sm:hidden">
                 <Image
                   src={require("../../assets/img/arrow-right.png")}
                   alt="next"

@@ -20,7 +20,7 @@ export const TopUpModal = ({ isVisible, closeModal }) => {
       id="wrapper"
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center "
     >
-      <div className="md:w-[500px] w-[80%] h-[70%] md:h-[400px] bg-white rounded-xl shadow-lg flex flex-col md:p-10 p-10 gap-5 md:gap-5 justify-center">
+      <div className="md:w-[500px] w-[80%] max-sm:w-[90%] h-[70%] md:h-[400px] bg-white rounded-xl shadow-lg flex flex-col md:p-10 p-10 gap-5 md:gap-5 justify-center">
         <div className="flex justify-between items-center">
           <p className="text-[#3A3D42] text-xl font-bold">Top Up</p>
           <button

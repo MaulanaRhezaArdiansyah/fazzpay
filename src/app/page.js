@@ -44,7 +44,7 @@ export default function LandingPage() {
           </nav>
         </header>
       )}
-      <main className="bg-white w-full md:h-[500vh] flex flex-col">
+      <main className="bg-white w-full md:h-[500vh] h-[440vh] flex flex-col">
         <HeroLanding />
         <CompanyPartnerLanding />
         <AboutAppLanding />

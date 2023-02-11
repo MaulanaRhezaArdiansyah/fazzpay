@@ -12,9 +12,9 @@ export const NotifModal = ({ isVisible, closeModal }) => {
     <div
       id="wrapper"
       onClick={handleClose}
-      className="fixed inset-0 bg-transparent flex justify-end "
+      className="fixed inset-0 bg-transparent flex justify-end"
     >
-      <div className="notif-container md:w-[400px] w-[80%] h-[70%] md:h-[450px] bg-white rounded-xl shadow-lg flex flex-col md:p-5 md:pt-20 p-5 gap-5 md:gap-5 justify-center overflow-y-scroll absolute top-32 right-32">
+      <div className="notif-container md:w-[400px] w-[90%] h-[70%] md:h-[450px] bg-white rounded-xl shadow-lg flex flex-col md:p-5 md:pt-20 p-5 gap-5 md:gap-5 justify-center overflow-y-scroll absolute top-32 right-32 max-sm:right-2">
         <div className="notif-card bg-white shadow-xl rounded-xl w-full h-32 flex justify-start items-center md:p-5 p-3 gap-2">
           <div className="flex items-center justify-center">
             <Image

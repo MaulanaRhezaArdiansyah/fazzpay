@@ -20,26 +20,26 @@ export const FeatureLanding = () => {
     },
   ];
   return (
-    <div className="feature md:h-[120vh] w-full bg-base-2 flex md:px-32 md:gap-10 overflow-hidden">
-      <div className="md:h-full md:w-1/3 ">
+    <div className="feature md:h-[120vh] h-[100vh] w-full bg-base-2 flex md:px-32 px-3 md:gap-10 overflow-hidden">
+      <div className="md:h-full md:w-1/3 max-sm:hidden">
         <Image
           src={require("../../assets/img/app-mobile-lp.png")}
           alt="feature"
         />
       </div>
-      <div className="md:h-full md:w-2/3  flex flex-col justify-center items-start">
-        <h2 className="text-[#3A3D42] text-5xl font-bold md:mb-10 text-left">
+      <div className="md:h-full md:w-2/3 flex flex-col justify-center items-start">
+        <h2 className="text-[#3A3D42] text-5xl font-bold md:mb-10 mb-10 text-center md:text-left">
           All The <span className="text-[#6379F4]">Great</span> FazzPay
           Features.
         </h2>
-        <div className="feature-row flex flex-col  md:w-full md:h-[60%] md:gap-5">
+        <div className="feature-row flex flex-col md:w-full md:h-[60%] h-[60%] md:gap-5 gap-5">
           {feature?.map((i, index) => {
             return (
               <div
                 key={i.id}
-                className="feature-card bg-white shadow-lg rounded-xl md:p-5 md:w-full md:h-32 flex flex-col justify-center md:gap-2 hover:scale-110 duration-200"
+                className="feature-card bg-white shadow-lg rounded-xl md:p-5 p-5 md:w-full md:h-32 h-32 flex flex-col justify-center md:gap-2"
               >
-                <h4 className="font-bold text-[#3A3D42] text-lg flex md:gap-2">
+                <h4 className="font-bold text-[#3A3D42] text-lg flex md:gap-2 gap-2">
                   <span className="text-[#6379F4]">{index + 1}.</span>
                   {i.title}
                 </h4>

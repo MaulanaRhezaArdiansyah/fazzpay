@@ -1,10 +1,13 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { FilterHistory } from "../components/FilterHistory";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { MenuNavCard } from "../components/MenuNavCard";
 import { HistoryCard } from "./components/HistoryCard";
 
 export default function History() {
+  // const [showModalFilter, setShowModalFilter] = useState(false);
   return (
     <>
       <Header />

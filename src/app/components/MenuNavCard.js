@@ -1,15 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { TopUpModal } from "./TopUpModal";
+import axios from "axios";
 
 export const MenuNavCard = () => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const id = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  const [dataUser, setDataUser] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/users/${id}`)
+      .then((result) => {
+        setDataUser(result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
-      <div className="menu-card shadow-lg bg-white md:p-12 flex flex-col w-full h-full rounded-xl justify-between">
+      <div className="menu-card shadow-lg bg-white md:p-12 flex flex-col w-full h-full rounded-xl justify-between max-sm:hidden">
         <div className="top flex flex-col md:gap-12">
           <button
             onClick={() => {
@@ -79,7 +92,9 @@ export const MenuNavCard = () => {
         <div className="bottom">
           <button
             onClick={() => {
-              alert(`You are logged out! See you soon 😊`);
+              alert(
+                `You are logged out! See you soon ${dataUser[0]?.first_name} 😊`
+              );
               localStorage.removeItem("@login");
               router.push("/auth/login");
             }}
