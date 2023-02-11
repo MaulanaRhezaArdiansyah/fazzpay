@@ -6,12 +6,17 @@ import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { FooterLanding } from "./components/FooterLanding";
 import { Header } from "./components/Header";
+import { AboutAppLanding } from "./components/AboutAppLanding";
+import { CompanyPartnerLanding } from "./components/CompanyPartnerLanding";
+import { HeroLanding } from "./components/HeroLanding";
+import { FeatureLanding } from "./components/FeatureLanding";
+import { ReviewLanding } from "./components/ReviewLanding";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function LandingPage() {
   const isLogged = JSON.parse(localStorage.getItem("@login"));
-  console.log(isLogged);
+
   return (
     <>
       {/* <header className="flex justify-between w-full h-32 items-center bg-white/5 backdrop-blur-sm fixed top-0 left-0 md:px-32"> */}
@@ -39,26 +44,12 @@ export default function LandingPage() {
           </nav>
         </header>
       )}
-      <main className="bg-white w-full md:h-[450vh]">
-        <div className="hero w-full md:px-32 md:h-[120vh] border-b-[3px] border-white bg-[#6379F4] flex md:flex-row">
-          <div className="text md:w-[50%] h-full flex flex-col justify-center items-start md:gap-8">
-            <h2 className="text-white text-4xl md:w-[80%] font-bold">
-              Awesome App For Saving Time.
-            </h2>
-            <p className="text-white md:w-[80%]">
-              We bring you a mobile app for banking problems that oftenly
-              wasting much of your times.
-            </p>
-            <Link href={"/home"}>
-              <button className="border-2 border-white bg-white rounded-md w-36 py-3 text-[#6379F4] font-bold hover:bg-transparent hover:text-white duration-200">
-                Try It Free
-              </button>
-            </Link>
-          </div>
-          <div className="image md:w-[50%] h-full flex items-end">
-            <Image src={require("../assets/img/phone-hero.png")} alt="phone" />
-          </div>
-        </div>
+      <main className="bg-white w-full md:h-[500vh] flex flex-col">
+        <HeroLanding />
+        <CompanyPartnerLanding />
+        <AboutAppLanding />
+        <FeatureLanding />
+        <ReviewLanding />
       </main>
       <FooterLanding />
     </>
