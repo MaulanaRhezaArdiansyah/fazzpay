@@ -1,11 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
 export const TopUpModal = ({ isVisible, closeModal }) => {
-  //   const [validate, setValidate] = useState({
-  //     error: false,
-  //     message: "Topup success!",
-  //   });
+  const id = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  const [topUpData, setTopUpData] = useState({
+    balance: 0,
+  });
+  const handleTopUp = (event) => {
+    event.preventDefault();
+    axios({
+      method: "PATCH",
+      url: `http://localhost:8000/api/v1/users/${id}`,
+      data: topUpData,
+    })
+      .then((result) => {
+        console.log(result);
+        alert(result.data.message);
+        setTopUpData(result.data.data.balance);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   if (!isVisible) {
     return null;
   }
@@ -18,9 +35,12 @@ export const TopUpModal = ({ isVisible, closeModal }) => {
     <div
       onClick={handleClose}
       id="wrapper"
-      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center "
+      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-20"
     >
-      <div className="md:w-[500px] w-[80%] max-sm:w-[90%] h-[70%] md:h-[400px] bg-white rounded-xl shadow-lg flex flex-col md:p-10 p-10 gap-5 md:gap-5 justify-center">
+      <form
+        onSubmit={handleTopUp}
+        className="topup-form md:w-[500px] w-[80%] max-sm:w-[90%] h-[70%] md:h-[400px] bg-white rounded-xl shadow-lg flex flex-col md:p-10 p-10 gap-5 md:gap-5 justify-center z-30"
+      >
         <div className="flex justify-between items-center">
           <p className="text-[#3A3D42] text-xl font-bold">Top Up</p>
           <button
@@ -34,19 +54,25 @@ export const TopUpModal = ({ isVisible, closeModal }) => {
           Enter the amount of money, and click submit.
         </p>
         <input
+          onChange={(e) => {
+            setTopUpData({
+              ...topUpData,
+              balance: parseInt(e.target.value),
+            });
+          }}
           type="text"
           className="border-[1px] border-[#A9A9A999] rounded-xl w-full py-5 focus:outline-1 focus:outline-[#6379F4] md:px-5 text-center text-2xl text-[#3A3D42] font-bold"
         />
         <button
           onClick={() => {
-            alert("Topup success!");
+            // alert(`${resul}`);
           }}
-          //   type="submit"
+          type="submit"
           className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
         >
           Submit
         </button>
-      </div>
+      </form>
     </div>
   );
 };
