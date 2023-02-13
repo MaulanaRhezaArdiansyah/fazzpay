@@ -11,29 +11,18 @@ import { BalanceCard } from "./components/BalanceCard";
 import { TransactionHistory } from "./components/TransactionHistory";
 
 export default function Home() {
-  const segment = usePathname();
-  const id = segment.split("/")[2];
+  // const segment = usePathname();
+  // const id = segment.split("/")[2];
   const isLogged = JSON.parse(localStorage.getItem("@login"));
   // const userId = isLogged.user.id;
-  // const [userPhone, setUserPhone] = useState("");
+  const userPhone = isLogged.user.phone;
   const router = useRouter();
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8000/api/v1/users/${userId}`)
-  //     .then((result) => {
-  //       console.log(result.data.data);
-  //       setUserPhone(result.data.data[0].phone);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response.data.message);
-  //     });
-  // }, []);
-  // if (userPhone.length == 0) {
-  //   router.push("/profile");
-  // }
+  // sementara menggunakan logic ini untuk cek phone user, ada atau tidak
   // jika dia belum login maka redirect ke auth login
   if (isLogged === null) {
     router.push("/auth/login");
+  } else if (userPhone.length === 0) {
+    router.push("/profile");
   }
   // jika dia sudah login maka akan routing ke home dashboard, yakni akan mereturn-kan / render componen di bawah ini
   return (

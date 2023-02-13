@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -67,14 +68,23 @@ export const ConfirmCard = () => {
           </p>
         </div>
       </div>
-      <div className="flex w-full md:h-[10rem] justify-end">
-        <button
+      <div className="flex w-full md:h-[10rem] justify-end items-end">
+        {/* <button
           onClick={() => alert("Transfer success!")}
           //   type="submit"
           className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
         >
           Continue
-        </button>
+        </button> */}
+        <Link href={`/transfer/status/${id}`}>
+          <button
+            onClick={() => alert("Please wait!")}
+            //   type="submit"
+            className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
+          >
+            Confirm
+          </button>
+        </Link>
       </div>
     </div>
   );

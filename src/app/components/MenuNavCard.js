@@ -28,7 +28,7 @@ export const MenuNavCard = () => {
             onClick={() => {
               router.push("/home");
             }}
-            className="flex items-center md:gap-3 cursor-pointer hover:text-[#6379F4]"
+            className="flex items-center md:gap-3 cursor-pointer text-[#3A3D42CC] hover:text-[#6379F4]"
             activeclassname="active"
           >
             <Image src={require("../../assets/img/grid.svg")} alt="dashboard" />
@@ -38,7 +38,7 @@ export const MenuNavCard = () => {
             onClick={() => {
               router.push("/transfer");
             }}
-            className="flex items-center md:gap-3 cursor-pointer hover:text-[#6379F4]"
+            className="flex items-center md:gap-3 cursor-pointer text-[#3A3D42CC] hover:text-[#6379F4]"
           >
             {/* <Image
                   src={require("../../../assets/img/arrow-up.svg")}
@@ -74,7 +74,7 @@ export const MenuNavCard = () => {
             onClick={() => {
               setShowModal(true);
             }}
-            className="flex items-center md:gap-3 cursor-pointer hover:text-[#6379F4] "
+            className="flex items-center md:gap-3 cursor-pointer text-[#3A3D42CC] hover:text-[#6379F4] "
           >
             <Image src={require("../../assets/img/plus.svg")} alt="top-up" />
             <p>Top Up</p>
@@ -83,7 +83,7 @@ export const MenuNavCard = () => {
             onClick={() => {
               router.push("/profile");
             }}
-            className="flex items-center md:gap-3 cursor-pointer hover:text-[#6379F4]"
+            className="flex items-center md:gap-3 cursor-pointer text-[#3A3D42CC] hover:text-[#6379F4]"
           >
             <Image src={require("../../assets/img/user.svg")} alt="user" />
             <p>Profile</p>
@@ -98,7 +98,7 @@ export const MenuNavCard = () => {
               localStorage.removeItem("@login");
               router.push("/auth/login");
             }}
-            className="flex items-center md:gap-3 cursor-pointer hover:text-[#6379F4]"
+            className="flex items-center md:gap-3 cursor-pointer text-[#3A3D42CC] hover:text-[#6379F4]"
           >
             <Image src={require("../../assets/img/log-out.svg")} alt="logout" />
             <p>Logout</p>
