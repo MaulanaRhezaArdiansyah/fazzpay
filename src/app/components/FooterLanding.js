@@ -16,7 +16,9 @@ export const FooterLanding = () => {
       </div>
       <hr />
       <div className="text-footer w-full flex flex-col md:flex-row justify-between items-start md:items-center pt-2 md:pt-2 gap-2 text-[#EFEFEFBF]">
-        <p className="copyright">2020 FazzPay. All right reserved.</p>
+        <p className="copyright">
+          {new Date().getFullYear()}FazzPay. All right reserved.
+        </p>
         <div className="flex flex-col-reverse md:flex-row justify-center items-center md:gap-5">
           <p className="phone">+62 5637 8882 9901</p>
           <p className="email">contact@fazzpay.com</p>

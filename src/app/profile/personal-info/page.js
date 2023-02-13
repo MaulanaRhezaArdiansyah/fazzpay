@@ -1,10 +1,10 @@
+import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
+import { MenuNavCard } from "@/app/components/MenuNavCard";
 import React from "react";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { MenuNavCard } from "../components/MenuNavCard";
-import { TransferCard } from "./components/TransferCard";
+import { PersonalInfoCard } from "./PersonalInfoCard";
 
-export default function Transfer() {
+export default function PersonalInfo() {
   return (
     <>
       <Header />
@@ -13,7 +13,7 @@ export default function Transfer() {
           <MenuNavCard />
         </section>
         <section className="content md:w-9/12 h-full flex md:flex-col md:gap-5">
-          <TransferCard />
+          <PersonalInfoCard />
         </section>
       </main>
       <Footer />
