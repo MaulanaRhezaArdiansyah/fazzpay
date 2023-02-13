@@ -9,6 +9,7 @@ import { Footer } from "@/app/components/Footer";
 import { MenuNavCard } from "@/app/components/MenuNavCard";
 import { BalanceCard } from "./components/BalanceCard";
 import { TransactionHistory } from "./components/TransactionHistory";
+import { ChartCard } from "./components/ChartCard";
 
 export default function Home() {
   // const segment = usePathname();
@@ -35,7 +36,7 @@ export default function Home() {
         <section className="content md:w-9/12 h-full flex md:flex-col md:gap-5">
           <BalanceCard />
           <div className="bottom flex w-full md:h-3/4 md:gap-5">
-            <div className="left bg-white rounded-xl md:h-full md:w-3/5 shadow-lg"></div>
+            <ChartCard />
             <TransactionHistory />
           </div>
         </section>
