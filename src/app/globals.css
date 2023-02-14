@@ -50,6 +50,17 @@ div > div > div > p.active {
   line-height: 28px;
 }
 
+.label-avatar {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
 @layer components {
   .bg-base {
     /* @apply bg-[#eceff0]; */
