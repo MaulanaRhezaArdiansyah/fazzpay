@@ -1,3 +1,4 @@
+"use client";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -11,15 +12,46 @@ export const TransferToCard = () => {
     axios
       .get(`http://localhost:8000/api/v1/users/${id}`)
       .then((result) => {
-        // console.log(result.data.data);
         setUserDetail(result.data.data[0]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  const userLoginID = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  const [userLoginData, setUserLoginData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/users/${userLoginID}`)
+      .then((result) => {
+        setUserLoginData(result.data.data[0]);
+        // console.log(result.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const [amount, setAmount] = useState(0);
+  const sendAmountData = (event) => {
+    event.preventDefault();
+    const amountInput = amount;
+    const userLoginBalance = parseInt(userLoginData?.balance);
+
+    if (amountInput > userLoginBalance) {
+      alert("Your balance is not enough! Please try again!");
+      router.refresh();
+    } else {
+      localStorage.setItem("@amount", amountInput);
+      router.push(`/transfer/confirm/${userDetail.id}`);
+    }
+  };
+
   return (
-    <div className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6">
+    <form
+      onSubmit={sendAmountData}
+      className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6"
+    >
       <p className="text-xl text-[#3A3D42] font-bold">Transfer Money</p>
       <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5">
         <div className="flex items-center h-full w-full ">
@@ -48,15 +80,17 @@ export const TransferToCard = () => {
         Type the amount you want to transfer and then press continue to the next
         steps.
       </p>
-      <div className="input-amount-container  md:w-80 md:h-72 self-center flex flex-col items-center justify-center gap-8">
+      <div className="input-amount-container md:w-80 md:h-72 self-center flex flex-col items-center justify-center gap-8">
         <input
           type="text"
+          onChange={(e) => {
+            setAmount(parseInt(e.target.value));
+          }}
           placeholder="10000"
           className="text-5xl text-center placeholder:text-[#B5BDCC] bg-transparent w-full focus:outline-none text-[#6379F4]"
         />
         <p className="text-[#3A3D42] text-center font-bold">
-          {/* Rp120.000 Available */}
-          Rp{userDetail.balance ? userDetail.balance : "0"} Available
+          Rp{userLoginData?.balance} Available
         </p>
         <div className="notes flex items-center w-full h-12 border-b-[2px] border-b-[#A9A9A999]  gap-2">
           <div className="flex items-center justify-center  w-8 h-full">
@@ -73,12 +107,15 @@ export const TransferToCard = () => {
         </div>
       </div>
       <button
-        onClick={() => router.push(`/transfer/confirm/${userDetail.id}`)}
-        //   type="submit"
+        type="submit"
+        onClick={() => {
+          // sendAmountData();
+          // router.push(`/transfer/confirm/${userDetail.id}`);
+        }}
         className="bg-[#6379F4] self-end justify-self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
       >
         Continue
       </button>
-    </div>
+    </form>
   );
 };

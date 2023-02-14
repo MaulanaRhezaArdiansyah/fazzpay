@@ -6,9 +6,10 @@ import axios from "axios";
 export const TransferCard = () => {
   const router = useRouter();
   const [userData, setUserData] = useState([]);
+  const [keyword, setKeyword] = useState("");
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/v1/users`)
+      .get(`http://localhost:8000/api/v1/users?search=${keyword}`)
       .then((result) => {
         // console.log(result.data.data);
         setUserData(result.data.data);
@@ -16,8 +17,7 @@ export const TransferCard = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  // console.log(userData);
+  }, [keyword]);
   return (
     <div className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6">
       <p className="text-xl text-[#3A3D42] font-bold">Search receiver</p>
@@ -30,6 +30,9 @@ export const TransferCard = () => {
           />
         </div>
         <input
+          onChange={(e) => {
+            setKeyword(e.target.value);
+          }}
           type="text"
           className="h-full bg-transparent w-[90%] px-3 focus:outline-none"
           placeholder="Search receiver here"

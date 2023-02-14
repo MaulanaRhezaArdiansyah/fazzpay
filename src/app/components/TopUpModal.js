@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 export const TopUpModal = ({ isVisible, closeModal }) => {
+  const router = useRouter();
   const id = JSON.parse(localStorage.getItem("@login"))?.user.id;
   const [topUpData, setTopUpData] = useState({
     balance: 0,
@@ -64,9 +66,7 @@ export const TopUpModal = ({ isVisible, closeModal }) => {
           className="border-[1px] border-[#A9A9A999] rounded-xl w-full py-5 focus:outline-1 focus:outline-[#6379F4] md:px-5 text-center text-2xl text-[#3A3D42] font-bold"
         />
         <button
-          onClick={() => {
-            // alert(`${resul}`);
-          }}
+          onClick={() => {}}
           type="submit"
           className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
         >

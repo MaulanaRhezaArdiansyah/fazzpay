@@ -1,9 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FilterHistory } from "@/app/components/FilterHistory";
+import axios from "axios";
 export const HistoryCard = () => {
   const [showModalFilter, setShowModalFilter] = useState(false);
+  const id = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/history/${id}`)
+      .then((result) => {
+        console.log(result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10">

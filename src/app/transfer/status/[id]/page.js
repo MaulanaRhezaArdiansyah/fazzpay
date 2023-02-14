@@ -7,7 +7,11 @@ import { StatusCardFailed } from "./StatusCardFailed";
 import { StatusCardSuccess } from "./StatusCardSuccess";
 
 export default function StatusTransfer() {
-  const isSuccess = true;
+  const amountTransfer = typeof JSON.parse(
+    localStorage.getItem("@amountConfirm")
+  );
+  const isSuccessTransfer = amountTransfer === "number";
+  // const isSuccess = true;
   return (
     <>
       <Header />
@@ -16,7 +20,7 @@ export default function StatusTransfer() {
           <MenuNavCard />
         </section>
         <section className="content md:w-9/12 h-full flex md:flex-col md:gap-5">
-          {isSuccess ? <StatusCardSuccess /> : <StatusCardFailed />}
+          {isSuccessTransfer ? <StatusCardSuccess /> : <StatusCardFailed />}
         </section>
       </main>
       <Footer />

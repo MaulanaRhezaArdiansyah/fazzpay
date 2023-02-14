@@ -7,20 +7,64 @@ export const ConfirmCard = () => {
   const segment = usePathname();
   const router = useRouter();
   const id = segment.split("/")[3];
+  const idSender = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  const amountData = parseInt(localStorage.getItem("@amount"));
+
   const [userDetail, setUserDetail] = useState([]);
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/v1/users/${id}`)
       .then((result) => {
-        // console.log(result.data.data[0]);
         setUserDetail(result.data.data[0]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const [senderDetail, setSenderDetail] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/users/${idSender}`)
+      .then((result) => {
+        setSenderDetail(result.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const balanceBefore = parseInt(senderDetail?.balance);
+
+  const [amountConfirm, setAmountConfirm] = useState({
+    amount: amountData,
+  });
+  const handleTransfer = (event) => {
+    event.preventDefault();
+    axios({
+      method: "PATCH",
+      url: `http://localhost:8000/api/v1/transfer/${id}/${idSender}`,
+      data: amountConfirm,
+    })
+      .then((result) => {
+        console.log(result.data);
+        localStorage.setItem("@amountConfirm", amountConfirm.amount);
+        localStorage.removeItem("@amount");
+        // alert(result.data.message);
+        router.push(`/transfer/status/${id}`);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+        router.back();
+      });
+  };
+
   return (
-    <div className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6">
+    <form
+      onSubmit={handleTransfer}
+      className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6"
+    >
       <p className="text-xl text-[#3A3D42] font-bold">Transfer To</p>
       <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5">
         <div className="flex items-center h-full w-full ">
@@ -49,11 +93,13 @@ export const ConfirmCard = () => {
       <div className="details-container flex flex-col w-full">
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Amount</p>
-          <p className="text-[#514F5B] text-2xl font-bold">Rp100.000</p>
+          <p className="text-[#514F5B] text-2xl font-bold">Rp{amountData}</p>
         </div>
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Balance Left</p>
-          <p className="text-[#514F5B] text-2xl font-bold">Rp20.000</p>
+          <p className="text-[#514F5B] text-2xl font-bold">
+            Rp{balanceBefore - amountData}
+          </p>
         </div>
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Date & Time</p>
@@ -76,16 +122,16 @@ export const ConfirmCard = () => {
         >
           Continue
         </button> */}
-        <Link href={`/transfer/status/${id}`}>
-          <button
-            onClick={() => alert("Please wait!")}
-            //   type="submit"
-            className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
-          >
-            Confirm
-          </button>
-        </Link>
+        {/* <Link href={`/transfer/status/${id}`}> */}
+        <button
+          // onClick={() => alert("Please wait!")}
+          type="submit"
+          className="bg-[#6379F4] self-end md:w-40 w-32 text-lg py-3 font-semibold rounded-xl text-white border-[2px] border-[#6379F4] hover:text-[#6379F4] hover:bg-white duration-200"
+        >
+          Confirm
+        </button>
+        {/* </Link> */}
       </div>
-    </div>
+    </form>
   );
 };

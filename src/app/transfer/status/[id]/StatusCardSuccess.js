@@ -8,6 +8,8 @@ export const StatusCardSuccess = () => {
   const segment = usePathname();
   const router = useRouter();
   const id = segment.split("/")[3];
+  const idSender = JSON.parse(localStorage.getItem("@login"))?.user.id;
+  const amountTransfer = JSON.parse(localStorage.getItem("@amountConfirm"));
   const [userDetail, setUserDetail] = useState([]);
   useEffect(() => {
     axios
@@ -20,6 +22,19 @@ export const StatusCardSuccess = () => {
         console.log(err);
       });
   }, []);
+
+  const [senderDetail, setSenderDetail] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/users/${idSender}`)
+      .then((result) => {
+        setSenderDetail(result.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const balanceBefore = parseInt(senderDetail?.balance);
   return (
     <div className="md:w-full md:h-full bg-white rounded-xl shadow-xl flex flex-col p-10 gap-6">
       <div className="transfer-status w-full h-52 flex flex-col items-center justify-center gap-6">
@@ -34,11 +49,13 @@ export const StatusCardSuccess = () => {
       <div className="details-container flex flex-col w-full">
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Amount</p>
-          <p className="text-[#514F5B] text-2xl font-bold">Rp100.000</p>
+          <p className="text-[#514F5B] text-2xl font-bold">
+            Rp{amountTransfer}
+          </p>
         </div>
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Balance Left</p>
-          <p className="text-[#514F5B] text-2xl font-bold">Rp20.000</p>
+          <p className="text-[#514F5B] text-2xl font-bold">Rp{balanceBefore}</p>
         </div>
         <div className="receiver-card bg-white w-full h-28 rounded-xl shadow-lg flex p-5 mb-5 flex-col justify-center gap-1">
           <p className="text-[#7A7886]">Date & Time</p>

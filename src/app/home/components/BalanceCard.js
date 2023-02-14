@@ -17,13 +17,16 @@ export const BalanceCard = () => {
         console.log(err);
       });
   }, []);
+  const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   return (
     <>
       <div className="top shadow-lg flex w-full md:h-1/4 rounded-xl bg-[#6379F4] justify-between items-center md:p-12 md:px-8">
         <div className="text flex flex-col gap-5">
           <p className="text-[#E0E0E0]">Balance</p>
           <p className="text-white text-4xl">
-            Rp{dataUser.balance ? dataUser.balance : "0"}
+            Rp{dataUser.balance ? numberWithCommas(dataUser.balance) : "0"}
           </p>
           <p className="text-[#DFDCDC]">
             {dataUser.phone ? dataUser.phone : "(empty phone number"}
