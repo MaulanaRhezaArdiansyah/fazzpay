@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const ProfileCard = () => {
   const id = JSON.parse(localStorage.getItem("@login"))?.user.id;
@@ -45,17 +46,28 @@ export const ProfileCard = () => {
       </h3>
       <p className="md:mb-8 text-[#7A7886] text-center">{dataUser[0]?.phone}</p>
       <div className="button-nav flex flex-col gap-3">
-        <button className="bg-[#e6e7e9] text-[#4D4B57] hover:text-white py-5 md:w-[400px] rounded-lg flex justify-between px-5 hover:bg-[#6379F4] duration-200">
-          <p className="font-semibold">Personal Information</p>
-          <Image src={require("../../../assets/img/arrow-right-2.png")} />
-        </button>
+        <Link href={"/profile/personal-info"}>
+          <button className="bg-[#e6e7e9] text-[#4D4B57] hover:text-white py-5 md:w-[400px] rounded-lg flex justify-between px-5 hover:bg-[#6379F4] duration-200">
+            <p className="font-semibold">Personal Information</p>
+            <Image
+              src={require("../../../assets/img/arrow-right-2.png")}
+              alt=""
+            />
+          </button>
+        </Link>
         <button className="bg-[#e6e7e9] text-[#4D4B57] hover:text-white py-5 md:w-[400px] rounded-lg flex justify-between px-5 hover:bg-[#6379F4] duration-200">
           <p className="font-semibold">Change Password</p>
-          <Image src={require("../../../assets/img/arrow-right-2.png")} />
+          <Image
+            src={require("../../../assets/img/arrow-right-2.png")}
+            alt=""
+          />
         </button>
         <button className="bg-[#e6e7e9] text-[#4D4B57] hover:text-white py-5 md:w-[400px] rounded-lg flex justify-between px-5 hover:bg-[#6379F4] duration-200">
           <p className="font-semibold">Change PIN</p>
-          <Image src={require("../../../assets/img/arrow-right-2.png")} />
+          <Image
+            src={require("../../../assets/img/arrow-right-2.png")}
+            alt=""
+          />
         </button>
         <button
           onClick={() => {
